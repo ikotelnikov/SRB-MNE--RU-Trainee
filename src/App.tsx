@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+import { Progress } from "./components/ui/progress";
+import { Button } from "./components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { Badge } from "./components/ui/badge";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
 import { Sparkles, RotateCcw, Check, X, Trophy, BookOpenText, Gamepad2, Brain, Upload, Download, Headphones, Shuffle, HelpCircle } from "lucide-react";
 
 import { ConfettiBurst } from "./components/ConfettiBurst";
@@ -221,34 +220,40 @@ export default function App() {
           <CardContent className="grid gap-4 p-4 md:grid-cols-4">
             <div>
               <Label className="mb-1 block text-sm">Режим</Label>
-              <Select value={mode} onValueChange={(v: any) => setMode(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="multiple">Тест (4 варианта)</SelectItem>
-                  <SelectItem value="sr_to_ru">SR → RU (ввод)</SelectItem>
-                  <SelectItem value="ru_to_sr">RU → SR (ввод)</SelectItem>
-                  <SelectItem value="typing">Слепой набор</SelectItem>
-                  <SelectItem value="true_false">Правда/ложь</SelectItem>
-                  <SelectItem value="scramble">Собери слово</SelectItem>
-                  <SelectItem value="audio">Аудио (произношение)</SelectItem>
-                </SelectContent>
-              </Select>
+              <select
+                value={mode}
+                onChange={(e) => setMode(e.target.value as Mode)}
+                className="w-full rounded border p-2"
+              >
+                <option value="multiple">Тест (4 варианта)</option>
+                <option value="sr_to_ru">SR → RU (ввод)</option>
+                <option value="ru_to_sr">RU → SR (ввод)</option>
+                <option value="typing">Слепой набор</option>
+                <option value="true_false">Правда/ложь</option>
+                <option value="scramble">Собери слово</option>
+                <option value="audio">Аудио (произношение)</option>
+              </select>
             </div>
             <div>
               <Label className="mb-1 block text-sm">Сложность</Label>
               <div className="flex items-center gap-3">
-                <Select
+                <select
                   value={String(difficulty)}
-                  onValueChange={(v) => {
+                  onChange={(e) => {
+                    const v = Number(e.target.value);
                     setAutoDifficulty(false);
-                    setDifficulty(Number(v));
-                    nextRound(Number(v));
+                    setDifficulty(v);
+                    nextRound(v);
                   }}
                   disabled={autoDifficulty}
+                  className="rounded border p-2"
                 >
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>{[1,2,3,4,5].map((n)=> <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}</SelectContent>
-                </Select>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={String(n)}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
                 <Button variant={autoDifficulty ? "default" : "outline"} size="sm" onClick={() => setAutoDifficulty((s) => !s)}>
                   <Brain className="mr-2 h-4 w-4" /> {autoDifficulty ? "Авто" : "Вручную"}
                 </Button>

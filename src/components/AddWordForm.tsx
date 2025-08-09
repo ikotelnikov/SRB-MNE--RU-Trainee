@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { Word } from "../types";
 
 export function AddWordForm({ onAdd }: { onAdd: (w: Word) => void }) {
@@ -14,10 +13,17 @@ export function AddWordForm({ onAdd }: { onAdd: (w: Word) => void }) {
       <div className="grid gap-2 md:grid-cols-4">
         <Input placeholder="sr/cr (latin)" value={sr} onChange={(e) => setSr(e.target.value)} />
         <Input placeholder="русский" value={ru} onChange={(e) => setRu(e.target.value)} />
-        <Select value={lvl} onValueChange={setLvl}>
-          <SelectTrigger><SelectValue placeholder="lvl" /></SelectTrigger>
-          <SelectContent>{[1,2,3,4,5].map((n)=> <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}</SelectContent>
-        </Select>
+        <select
+          value={lvl}
+          onChange={(e) => setLvl(e.target.value)}
+          className="rounded border p-2"
+        >
+          {[1, 2, 3, 4, 5].map((n) => (
+            <option key={n} value={String(n)}>
+              {n}
+            </option>
+          ))}
+        </select>
         <Input placeholder="тег" value={tag} onChange={(e) => setTag(e.target.value)} />
       </div>
       <div className="flex justify-end">
