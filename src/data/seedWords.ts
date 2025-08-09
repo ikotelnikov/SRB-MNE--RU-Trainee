@@ -1,0 +1,60 @@
+import { Word } from "../types";
+
+export const SEED_WORDS: Word[] = [
+  // Core greetings & basics
+  { sr: "zdravo", ru: "привет", level: 1, tag: "greeting" },
+  { sr: "dobar dan", ru: "добрый день", level: 1, tag: "greeting" },
+  { sr: "dobro jutro", ru: "доброе утро", level: 1, tag: "greeting" },
+  { sr: "laku noć", ru: "спокойной ночи", level: 1, tag: "greeting" },
+  { sr: "hvala", ru: "спасибо", level: 1, tag: "basic" },
+  { sr: "molim", ru: "пожалуйста", level: 1, tag: "basic" },
+  { sr: "izvinite", ru: "извините", level: 1, tag: "basic" },
+  { sr: "da", ru: "да", level: 1, tag: "basic" },
+  { sr: "ne", ru: "нет", level: 1, tag: "basic" },
+  { sr: "kako si?", ru: "как ты?", level: 1, tag: "greeting" },
+  { sr: "dobro", ru: "хорошо", level: 1, tag: "basic" },
+  { sr: "loše", ru: "плохо", level: 1, tag: "basic" },
+  { sr: "može", ru: "можно / ок", level: 1, tag: "basic" },
+  { sr: "ne može", ru: "нельзя / не получится", level: 1, tag: "basic" },
+
+  // Travel & daily
+  { sr: "gdje", ru: "где", level: 1, tag: "travel" },
+  { sr: "kada", ru: "когда", level: 1, tag: "time" },
+  { sr: "koliko", ru: "сколько", level: 1, tag: "shop" },
+  { sr: "račun", ru: "счет (в кафе)", level: 2, tag: "cafe" },
+  { sr: "keš", ru: "наличные", level: 2, tag: "shop" },
+  { sr: "kartica", ru: "карта (банковская)", level: 2, tag: "shop" },
+  { sr: "ukusno", ru: "вкусно", level: 2, tag: "food" },
+  { sr: "plaža", ru: "пляж", level: 2, tag: "travel" },
+  { sr: "stan", ru: "квартира", level: 2, tag: "home" },
+  { sr: "saobraćaj", ru: "трафик/движение", level: 2, tag: "city" },
+
+  // Frequency pack (short subset)
+  { sr: "ja", ru: "я", level: 1, tag: "freq" },
+  { sr: "ti", ru: "ты", level: 1, tag: "freq" },
+  { sr: "on", ru: "он", level: 1, tag: "freq" },
+  { sr: "ona", ru: "она", level: 1, tag: "freq" },
+  { sr: "mi", ru: "мы", level: 1, tag: "freq" },
+  { sr: "vi", ru: "вы", level: 1, tag: "freq" },
+  { sr: "oni", ru: "они", level: 1, tag: "freq" },
+  { sr: "ovdje", ru: "здесь", level: 1, tag: "freq" },
+  { sr: "tamo", ru: "там", level: 1, tag: "freq" },
+  { sr: "danas", ru: "сегодня", level: 1, tag: "time" },
+  { sr: "sutra", ru: "завтра", level: 1, tag: "time" },
+  { sr: "juče", ru: "вчера", level: 1, tag: "time" },
+  { sr: "sad", ru: "сейчас", level: 1, tag: "time" },
+  { sr: "uveče", ru: "вечером", level: 1, tag: "time" },
+  { sr: "ujutru", ru: "утром", level: 1, tag: "time" },
+  { sr: "raditi", ru: "работать", level: 2, tag: "verb" },
+  { sr: "ići", ru: "идти / ехать", level: 2, tag: "verb" },
+  { sr: "moći", ru: "мочь", level: 2, tag: "verb" },
+  { sr: "htjeti", ru: "хотеть", level: 2, tag: "verb" },
+  { sr: "morati", ru: "долженствовать / нужно", level: 2, tag: "verb" },
+
+  // Pro/interest (aviation etc.)
+  { sr: "vazduhoplovstvo", ru: "авиация", level: 4, tag: "aviation" },
+  { sr: "navigacija", ru: "навигация", level: 4, tag: "aviation" },
+  { sr: "kontrola leta", ru: "управление полетом", level: 4, tag: "aviation" },
+  { sr: "održavanje aviona", ru: "тех. обслуживание самолета", level: 5, tag: "aviation" },
+  { sr: "istraživanje i razvoj", ru: "исследования и разработки", level: 5, tag: "science" },
+];
