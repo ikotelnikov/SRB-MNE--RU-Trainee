@@ -32,5 +32,28 @@ src/
    npm test
    ```
 
+## Deployment
+1. Build the production bundle:
+   ```bash
+   npm run build
+   ```
+   This generates static files in `dist/`.
+2. Publish to GitHub Pages:
+   ```bash
+   npm install --save-dev gh-pages
+   ```
+   Add a script in `package.json`:
+   ```json
+   "scripts": {
+     "deploy": "npm run build && gh-pages -d dist"
+   }
+   ```
+   Then run:
+   ```bash
+   npm run deploy
+   ```
+   In your repository settings, enable Pages for the `gh-pages` branch.
+3. Your app will be available at `https://<username>.github.io/<repo>/`.
+
 ## License
 Distributed under the MIT License. See `LICENSE` for details.
