@@ -5,6 +5,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: string;
 }
 
-export function Button({ children, ...props }: ButtonProps) {
-  return <button {...props}>{children}</button>;
+export function Button({ children, className = "", ...props }: ButtonProps) {
+  return (
+    <button
+      className={`btn ${className}`.trim()}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 }
