@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
-import { Sparkles, RotateCcw, Check, X, Trophy, BookOpenText, Gamepad2, Brain, Upload, Download, Headphones, Shuffle, HelpCircle } from "lucide-react";
+import { Sparkles, RotateCcw, Check, X, Trophy, BookOpenText, Gamepad2, Brain, Upload, Download, Headphones, Shuffle } from "lucide-react";
 
 import { ConfettiBurst } from "./components/ConfettiBurst";
 import { StatCard } from "./components/StatCard";
@@ -247,7 +247,7 @@ export default function App() {
                   </select>
                 )}
                 <Button variant={autoDifficulty ? "default" : "outline"} size="sm" onClick={() => setAutoDifficulty((s) => !s)}>
-                  <Brain className="mr-2 h-4 w-4" /> {autoDifficulty ? "Авто" : "Вручную"}
+                  <Brain className="h-4 w-4" /> {autoDifficulty ? "Авто" : "Вручную"}
                 </Button>
               </div>
             </div>
@@ -257,34 +257,31 @@ export default function App() {
         {/* Game Area */}
         <Card className="relative overflow-hidden">
           <ConfettiBurst trigger={burstKey} />
-          <CardHeader className="flex items-center justify-between pb-0">
+          <CardHeader className="pb-0">
             <CardTitle className="flex items-center gap-2">
               <Gamepad2 className="h-5 w-5 text-sky-600" /> Упражнение
             </CardTitle>
-            <Button variant="secondary" size="sm" onClick={() => nextRound()}>
-              <RotateCcw className="mr-2 h-4 w-4" /> Пропустить / Новый
-            </Button>
           </CardHeader>
           <CardContent className="relative p-6">
             <div className="grid gap-6 md:grid-cols-2">
               {/* Prompt */}
               <div>
-                <div className="mb-2 flex items-center gap-2 text-sm text-slate-600">
-                  Переведи <HelpCircle className="h-4 w-4"/>
-                </div>
                 <AnimatePresence mode="wait">
                   <motion.div key={current?.sr + mode}
                     initial={{ y: 8, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -8, opacity: 0 }}
-                    className="rounded-2xl bg-gradient-to-r from-sky-600 to-indigo-600 p-5 text-white shadow-lg">
+                    className="relative rounded-2xl bg-gradient-to-r from-sky-600 to-indigo-600 p-5 text-white shadow-lg">
+                    <Button variant="secondary" size="sm" onClick={() => nextRound()} className="absolute right-2 top-2">
+                      <RotateCcw className="h-4 w-4" />
+                    </Button>
                     <div className="text-sm opacity-90">{mode === "ru_to_sr" ? "Русский" : "Sr/Cr (latin)"}</div>
                     <div className="mt-1 text-2xl font-semibold">
                       {mode === "ru_to_sr" ? current?.ru : current?.sr}
                     </div>
                     {mode === "audio" && (
                       <Button className="mt-3" variant="secondary" onClick={()=> current && speak(current)}>
-                        <Headphones className="mr-2 h-4 w-4"/> Произнести
+                        <Headphones className="h-4 w-4" /> Произнести
                       </Button>
                     )}
                     {mode === "scramble" && (
@@ -396,7 +393,7 @@ export default function App() {
               <CardContent className="flex flex-col gap-4 p-4">
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" onClick={exportProgress}>
-                    <Download className="mr-2 h-4 w-4" />Экспорт
+                    <Download className="h-4 w-4" /> Экспорт
                   </Button>
                   <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm">
                     <Upload className="h-4 w-4" /> Импорт

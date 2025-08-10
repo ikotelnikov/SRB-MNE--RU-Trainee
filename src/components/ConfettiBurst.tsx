@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export function ConfettiBurst({ trigger }: { trigger: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
@@ -20,6 +21,7 @@ export function ConfettiBurst({ trigger }: { trigger: number }) {
       life: 0,
       maxLife: 50 + Math.random() * 30,
     }));
+    setVisible(true);
     let raf = 0;
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
@@ -31,10 +33,17 @@ export function ConfettiBurst({ trigger }: { trigger: number }) {
         ctx.fillStyle = p.color;
         ctx.fillRect(p.x, p.y, p.size, p.size);
       });
-      if (pieces.some((p) => p.life < p.maxLife && p.y < H + 40)) raf = requestAnimationFrame(draw);
+      if (pieces.some((p) => p.life < p.maxLife && p.y < H + 40)) {
+        raf = requestAnimationFrame(draw);
+      } else {
+        setVisible(false);
+      }
     };
     draw();
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      setVisible(false);
+    };
   }, [trigger]);
-  return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0" />;
+  return <canvas ref={canvasRef} className={`pointer-events-none absolute inset-0 z-50 transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`} />;
 }
