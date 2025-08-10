@@ -194,7 +194,7 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Header */}
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-6 flex items-center gap-3 flex-nowrap">
         <motion.div
           initial={{ rotate: -10, scale: 0.9 }}
           animate={{ rotate: 0, scale: 1 }}
@@ -203,12 +203,12 @@ export default function App() {
         >
           <BookOpenText className="h-6 w-6" />
         </motion.div>
-        <h1 className="text-2xl font-bold">Сербско/черногорский ↔ русский</h1>
+        <h1 className="text-2xl font-bold whitespace-nowrap">Сербско/черногорский ↔ русский</h1>
       </div>
 
         {/* Controls */}
         <Card className="mb-6">
-          <CardContent className="flex flex-wrap items-end gap-4 p-4">
+          <CardContent className="flex items-end gap-4 p-4">
             <div>
               <Label className="mb-1 block text-sm">Режим</Label>
               <select
