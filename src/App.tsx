@@ -214,7 +214,7 @@ export default function App() {
               <select
                 value={mode}
                 onChange={(e) => setMode(e.target.value as Mode)}
-                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="w-full h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
                 <option value="multiple">Тест (4 варианта)</option>
                 <option value="sr_to_ru">SR → RU (ввод)</option>
@@ -237,7 +237,7 @@ export default function App() {
                       setDifficulty(v);
                       nextRound(v);
                     }}
-                    className="rounded-md border border-slate-300 bg-white px-2 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                    className="h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                   >
                     {[1, 2, 3, 4, 5].map((n) => (
                       <option key={n} value={String(n)}>
