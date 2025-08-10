@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules/
 jspm_packages/
@@ -59,3 +60,7 @@ temp/
 
 # TypeScript
 *.tsbuildinfo
+=======
+node_modules/
+package-lock.json
+>>>>>>> 5d6213c91433e06ffd4c5c747a4320dd52426cf4
