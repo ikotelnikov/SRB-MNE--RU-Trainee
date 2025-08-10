@@ -25,7 +25,7 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - run: npm install   
       - run: npm run build
       # Если есть client-side роутинг, оставь строку ниже:
       # - run: cp dist/index.html dist/404.html
