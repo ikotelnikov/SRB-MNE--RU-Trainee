@@ -4,7 +4,6 @@ import { Progress } from "./components/ui/progress";
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import { Badge } from "./components/ui/badge";
 import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Sparkles, RotateCcw, Check, X, Trophy, BookOpenText, Gamepad2, Brain, Upload, Download, Headphones, Shuffle, HelpCircle } from "lucide-react";
@@ -40,7 +39,6 @@ export default function App() {
 
   useEffect(() => saveDict(dict), [dict]);
 
-  const overallLevel = useMemo(() => xpToLevel(progress.xp), [progress.xp]);
   const overallPct = useMemo(() => clamp(((progress.xp % 2500) / 2500) * 100, 0, 100), [progress.xp]);
 
   function pickCard(level: number): Word {
@@ -196,33 +194,27 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Header */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <motion.div initial={{ rotate: -10, scale: 0.9 }} animate={{ rotate: 0, scale: 1 }} transition={{ type: "spring", stiffness: 200 }} className="rounded-2xl bg-sky-600 p-3 text-white shadow">
-              <BookOpenText className="h-6 w-6" />
-            </motion.div>
-            <div>
-              <h1 className="text-2xl font-bold">Serbo‑Montenegrin Trainer (Latin)</h1>
-              <p className="text-sm text-slate-600">Сербско/черногорский ↔ русский • режимы • уровни • геймификация</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Badge variant="secondary" className="text-slate-700">
-              <Trophy className="mr-1 inline h-4 w-4" /> Lvl {overallLevel}
-            </Badge>
-            <div className="w-40"><Progress value={overallPct} /></div>
-          </div>
-        </div>
+      <div className="mb-6 flex items-center gap-3">
+        <motion.div
+          initial={{ rotate: -10, scale: 0.9 }}
+          animate={{ rotate: 0, scale: 1 }}
+          transition={{ type: "spring", stiffness: 200 }}
+          className="rounded-2xl bg-sky-600 p-3 text-white shadow"
+        >
+          <BookOpenText className="h-6 w-6" />
+        </motion.div>
+        <h1 className="text-2xl font-bold">Сербско/черногорский ↔ русский</h1>
+      </div>
 
         {/* Controls */}
         <Card className="mb-6">
-          <CardContent className="grid gap-4 p-4 md:grid-cols-4">
+          <CardContent className="flex flex-wrap items-end gap-4 p-4">
             <div>
               <Label className="mb-1 block text-sm">Режим</Label>
               <select
                 value={mode}
                 onChange={(e) => setMode(e.target.value as Mode)}
-                className="w-full rounded border p-2"
+                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
                 <option value="multiple">Тест (4 варианта)</option>
                 <option value="sr_to_ru">SR → RU (ввод)</option>
@@ -236,39 +228,28 @@ export default function App() {
             <div>
               <Label className="mb-1 block text-sm">Сложность</Label>
               <div className="flex items-center gap-3">
-                <select
-                  value={String(difficulty)}
-                  onChange={(e) => {
-                    const v = Number(e.target.value);
-                    setAutoDifficulty(false);
-                    setDifficulty(v);
-                    nextRound(v);
-                  }}
-                  disabled={autoDifficulty}
-                  className="rounded border p-2"
-                >
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <option key={n} value={String(n)}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
+                {!autoDifficulty && (
+                  <select
+                    value={String(difficulty)}
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      setAutoDifficulty(false);
+                      setDifficulty(v);
+                      nextRound(v);
+                    }}
+                    className="rounded-md border border-slate-300 bg-white px-2 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  >
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <option key={n} value={String(n)}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
+                )}
                 <Button variant={autoDifficulty ? "default" : "outline"} size="sm" onClick={() => setAutoDifficulty((s) => !s)}>
                   <Brain className="mr-2 h-4 w-4" /> {autoDifficulty ? "Авто" : "Вручную"}
                 </Button>
               </div>
-            </div>
-            <div className="flex flex-col justify-end gap-2">
-              <Button variant="secondary" onClick={() => nextRound()}>
-                <RotateCcw className="mr-2 h-4 w-4" /> Пропустить / Новый
-              </Button>
-            </div>
-            <div className="flex items-end gap-2">
-              <Button variant="outline" onClick={exportProgress}><Download className="mr-2 h-4 w-4"/>Экспорт</Button>
-              <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm">
-                <Upload className="h-4 w-4" /> Импорт
-                <input type="file" accept="application/json" className="hidden" onChange={(e)=>{ const f=e.target.files?.[0]; if(f) importProgress(f); }} />
-              </label>
             </div>
           </CardContent>
         </Card>
@@ -276,10 +257,13 @@ export default function App() {
         {/* Game Area */}
         <Card className="relative overflow-hidden">
           <ConfettiBurst trigger={burstKey} />
-          <CardHeader className="pb-0">
+          <CardHeader className="flex items-center justify-between pb-0">
             <CardTitle className="flex items-center gap-2">
               <Gamepad2 className="h-5 w-5 text-sky-600" /> Упражнение
             </CardTitle>
+            <Button variant="secondary" size="sm" onClick={() => nextRound()}>
+              <RotateCcw className="mr-2 h-4 w-4" /> Пропустить / Новый
+            </Button>
           </CardHeader>
           <CardContent className="relative p-6">
             <div className="grid gap-6 md:grid-cols-2">
@@ -362,7 +346,9 @@ export default function App() {
               <StatCard label="Точность за сессию" value={`${sessionPct}%`} hint={`${sessionCorrect}/${sessionTotal}`} />
               <StatCard label="Серия ответов" value={`${progress.streak}`} hint="сброс при ошибке" />
               <div className="flex flex-col">
-                <div className="mb-2 text-sm text-slate-600">Прогресс уровня</div>
+                <div className="mb-2 flex items-center text-sm text-slate-600">
+                  <Trophy className="mr-1 h-4 w-4 text-sky-600" /> Прогресс уровня
+                </div>
                 <Progress value={overallPct} />
               </div>
             </div>
@@ -404,9 +390,30 @@ export default function App() {
 
           <TabsContent value="sync" className="mt-4">
             <Card>
-              <CardContent className="prose prose-sm max-w-none p-4">
-                <h3>Экспорт/импорт прогресса</h3>
-                <p>Используйте кнопки вверху (Экспорт/Импорт), чтобы переносить словарь и прогресс между устройствами. Файл формата JSON.</p>
+              <CardHeader>
+                <CardTitle>Экспорт/импорт прогресса</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-4 p-4">
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" onClick={exportProgress}>
+                    <Download className="mr-2 h-4 w-4" />Экспорт
+                  </Button>
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm">
+                    <Upload className="h-4 w-4" /> Импорт
+                    <input
+                      type="file"
+                      accept="application/json"
+                      className="hidden"
+                      onChange={(e) => {
+                        const f = e.target.files?.[0];
+                        if (f) importProgress(f);
+                      }}
+                    />
+                  </label>
+                </div>
+                <p className="text-sm text-slate-600">
+                  Переносите словарь и прогресс между устройствами через JSON файл.
+                </p>
               </CardContent>
             </Card>
           </TabsContent>
