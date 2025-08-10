@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff, #d9e8ff);
+  min-height: 100vh;
+}
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  margin-bottom: 0.5rem;
+}
+.card-title {
+  margin: 0 0 0.5rem;
+}
+.btn {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+.input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+}
+.label {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: #e0e7ff;
+}
+.tabs-list {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.tab-trigger {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: #e5e7eb;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tab-trigger.active {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  color: #fff;
+}
+.tab-content {
+  margin-top: 1rem;
+}
+.progress {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 8px;
+}
+.progress-bar {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  height: 100%;
+}

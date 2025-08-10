@@ -4,6 +4,10 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: string;
 }
 
-export function Badge({ children, ...props }: BadgeProps) {
-  return <span {...props}>{children}</span>;
+export function Badge({ children, className = "", ...props }: BadgeProps) {
+  return (
+    <span className={`badge ${className}`.trim()} {...props}>
+      {children}
+    </span>
+  );
 }

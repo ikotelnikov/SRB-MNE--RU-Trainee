@@ -194,9 +194,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-white to-sky-50 p-4 md:p-8">
-      <div className="mx-auto max-w-5xl">
-        {/* Header */}
+    <div className="app-container">
+      {/* Header */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <motion.div initial={{ rotate: -10, scale: 0.9 }} animate={{ rotate: 0, scale: 1 }} transition={{ type: "spring", stiffness: 200 }} className="rounded-2xl bg-sky-600 p-3 text-white shadow">
@@ -371,7 +370,7 @@ export default function App() {
         </Card>
 
         {/* Dictionary & Import */}
-        <Tabs defaultValue="dict" className="mt-8">
+        <Tabs defaultValue="" className="mt-8">
           <TabsList>
             <TabsTrigger value="dict">Словарь</TabsTrigger>
             <TabsTrigger value="about">О приложении</TabsTrigger>
@@ -438,7 +437,6 @@ export default function App() {
         </Tabs>
 
         <footer className="mt-10 pb-8 text-center text-xs text-slate-500">Made for fast daily drills • 🇲🇪🇷🇸 Latinica</footer>
-      </div>
     </div>
   );
 }
