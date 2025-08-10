@@ -11,7 +11,7 @@ export function AddWordForm({ onAdd }: { onAdd: (w: Word) => void }) {
   return (
     <div className="grid gap-2 rounded-xl border p-3">
       <div className="grid gap-2 md:grid-cols-4">
-        <Input placeholder="sr/cr (latin)" value={sr} onChange={(e) => setSr(e.target.value)} />
+        <Input placeholder="Crn" value={sr} onChange={(e) => setSr(e.target.value)} />
         <Input placeholder="русский" value={ru} onChange={(e) => setRu(e.target.value)} />
         <select
           value={lvl}

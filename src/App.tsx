@@ -82,7 +82,7 @@ export default function App() {
   function speak(word: Word) {
     try {
       const u = new SpeechSynthesisUtterance(word.sr);
-      u.lang = "sr-RS"; // Serbian (Latin speech where available)
+      u.lang = "sr-RS"; // Crnogorski (Srpski) (Latin speech where available)
       u.rate = 0.95;
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(u);
@@ -203,7 +203,7 @@ export default function App() {
         >
           <BookOpenText className="h-6 w-6" />
         </motion.div>
-        <h1 className="text-2xl font-bold whitespace-nowrap">Сербско/черногорский ↔ русский</h1>
+        <h1 className="text-2xl font-bold whitespace-nowrap">Crnogorski (Srpski) ↔ русский</h1>
       </div>
 
         {/* Controls */}
@@ -217,8 +217,8 @@ export default function App() {
                 className="w-full h-10 rounded-lg border border-slate-300 bg-white px-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
                 <option value="multiple">Тест (4 варианта)</option>
-                <option value="sr_to_ru">SR → RU (ввод)</option>
-                <option value="ru_to_sr">RU → SR (ввод)</option>
+                <option value="sr_to_ru">Crn → Ру (ввод)</option>
+                <option value="ru_to_sr">Ру → Crn (ввод)</option>
                 <option value="typing">Слепой набор</option>
                 <option value="true_false">Правда/ложь</option>
                 <option value="scramble">Собери слово</option>
@@ -275,8 +275,8 @@ export default function App() {
                     <Button variant="secondary" size="sm" onClick={() => nextRound()} className="absolute right-2 top-2">
                       <RotateCcw className="h-4 w-4" />
                     </Button>
-                    <div className="text-sm opacity-90">{mode === "ru_to_sr" ? "Русский" : "Sr/Cr (latin)"}</div>
-                    <div className="mt-1 text-2xl font-semibold">
+                    {mode === "ru_to_sr" && <div className="text-sm opacity-90">Русский</div>}
+                    <div className="mt-1 text-3xl font-semibold">
                       {mode === "ru_to_sr" ? current?.ru : current?.sr}
                     </div>
                     {mode === "audio" && (
@@ -311,13 +311,13 @@ export default function App() {
                   </div>
                 ) : mode === "scramble" ? (
                   <div className="flex gap-2">
-                    <Input placeholder={mode === "ru_to_sr" ? "Собери: ser/cr (latin)" : "Собери: русский"}
+                    <Input placeholder={mode === "ru_to_sr" ? "Собери: Crn" : "Собери: русский"}
                       value={answer} onChange={(e) => setAnswer(e.target.value)} onKeyDown={(e) => e.key === "Enter" && checkScramble()} className="h-14 text-lg" />
                     <Button className="h-14 px-6" onClick={checkScramble}>Проверить</Button>
                   </div>
                 ) : (
                   <div className="flex gap-2">
-                    <Input placeholder={mode === "ru_to_sr" ? "Введите перевод на ser/cr (latin)" : "Введите перевод на русский"}
+                    <Input placeholder={mode === "ru_to_sr" ? "Введите перевод на Crn" : "Введите перевод на русский"}
                       value={answer} onChange={(e) => setAnswer(e.target.value)} onKeyDown={(e) => e.key === "Enter" && checkTyping()} className="h-14 text-lg" />
                     <Button className="h-14 px-6" onClick={checkTyping}>Проверить</Button>
                   </div>
@@ -366,7 +366,7 @@ export default function App() {
                 <CardTitle>Ваш словарь ({dict.length})</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-sm text-slate-600">Добавляйте слова вручную или импортируйте CSV: <code>sr,ru,level,tag</code></div>
+                <div className="text-sm text-slate-600">Добавляйте слова вручную или импортируйте CSV: <code>crn,ru,level,tag</code></div>
                 <AddWordForm onAdd={(w) => setDict((d) => { const nd=[...d, w]; saveDict(nd); return nd; })} />
                 <CsvImport onImport={(rows) => setDict((d) => { const nd=[...d, ...rows]; saveDict(nd); return nd; })} />
 
@@ -418,29 +418,13 @@ export default function App() {
           <TabsContent value="about" className="mt-4">
             <Card>
               <CardContent className="prose prose-sm max-w-none p-4">
-                <h3>Как это работает</h3>
-                <ul>
-                  <li>Режимы: варианты, ввод RU↔SR, слепой набор, правда/ложь, «собери слово», аудио-произношение.</li>
-                  <li>Сложность: вручную или авто-рост по XP/серии.</li>
-                  <li>Геймификация: XP, уровни, серия, конфетти, анимации.</li>
-                  <li>Прогресс/словарь сохраняются локально и могут экспортироваться.</li>
-                </ul>
-                <p className="text-slate-600">Частотный мини-набор включён. Можем импортировать ваш большой список CSV.</p>
-                <h4>Развёртывание (Vite + Tailwind + shadcn/ui)</h4>
-                <ol>
-                  <li>Создать проект: <code>npm create vite@latest serb-trainer -- --template react-ts</code></li>
-                  <li>Установить зависимости: <code>npm i framer-motion lucide-react class-variance-authority tailwind-merge tailwindcss postcss autoprefixer</code></li>
-                  <li>Инициализировать Tailwind: <code>npx tailwindcss init -p</code> и подключить в <code>index.css</code>.</li>
-                  <li>Добавить shadcn/ui: <code>npx shadcn@latest init</code>, затем <code>npx shadcn@latest add button card input select tabs badge progress label</code>.</li>
-                  <li>Заменить <code>App.tsx</code> содержимым этого файла. Настроить алиас <code>@/components</code> в <code>tsconfig.json</code>.</li>
-                  <li>Локальный запуск: <code>npm run dev</code>. Деплой: push в GitHub → Vercel «Import Project».</li>
-                </ol>
+                <p>Приложение предназначено для изучения черногорского языка, написано целиком на GPT-5 + Codex, развернуто на GitHub Pages в августе 2025. О, дивный новый мир!</p>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
 
-        <footer className="mt-10 pb-8 text-center text-xs text-slate-500">Made for fast daily drills • 🇲🇪🇷🇸 Latinica</footer>
+        <footer className="mt-10 pb-8 text-center text-xs text-slate-500">связаться с автором можно через telegram: ikotelnikov</footer>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 # SRB-MNE--RU-Trainee
 
-A small React + TypeScript web application for Russian speakers to practice Serbian/Montenegrin vocabulary.
+A small React + TypeScript web application for Russian speakers to practice Crnogorski (Srpski) vocabulary.
 
 ## Features
-- Multiple training modes: multiple choice, RU↔SR typing, true/false, scramble, and audio pronunciation.
+- Multiple training modes: multiple choice, RU↔Crn typing, true/false, scramble, and audio pronunciation.
 - Adaptive difficulty with XP, levels and streak tracking.
 - Local dictionary storage with import/export and CSV import.
 - Built with Vite, Tailwind CSS and shadcn/ui components.

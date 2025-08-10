@@ -20,7 +20,7 @@ export function CsvImport({ onImport }: { onImport: (rows: Word[]) => void }) {
   }
   return (
     <div className="grid gap-2 rounded-xl border p-3">
-      <textarea className="min-h-[120px] w-full rounded-xl border p-3" placeholder="sr,ru,level,tag\nzdravo,привет,1,greeting" value={text} onChange={(e) => setText(e.target.value)} />
+      <textarea className="min-h-[120px] w-full rounded-xl border p-3" placeholder="crn,ru,level,tag\nzdravo,привет,1,greeting" value={text} onChange={(e) => setText(e.target.value)} />
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-500">Вставьте CSV и нажмите Импорт</span>
         <div className="flex items-center gap-2">
