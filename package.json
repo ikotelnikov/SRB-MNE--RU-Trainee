@@ -10,6 +10,8 @@
     "test": "echo \"No tests specified\""
   },
   "dependencies": {
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.539.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
