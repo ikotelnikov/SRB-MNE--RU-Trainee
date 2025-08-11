@@ -14,8 +14,15 @@ import { AddWordForm } from "./components/AddWordForm";
 import { CsvImport } from "./components/CsvImport";
 import { Word, Mode, ProgressState } from "./types";
 import { choice, clamp, loadDict, loadProgress, saveDict, saveProgress, xpToLevel, shuffle } from "./utils";
-
-
+const modePrompts: Record<Mode, string> = {
+  multiple: "Выбери ответ",
+  sr_to_ru: "Введи русский",
+  ru_to_sr: "Введи Crn",
+  typing: "Печатай слово",
+  scramble: "Собери слово",
+  true_false: "Правда или ложь",
+  audio: "Слушай и переводи",
+};
 
 // -------------------------------------------------
 // Main App
@@ -259,7 +266,7 @@ export default function App() {
           <ConfettiBurst trigger={burstKey} />
           <CardHeader className="pb-0">
             <CardTitle className="flex items-center gap-2">
-              <Gamepad2 className="h-5 w-5 text-sky-600" /> Упражнение
+              <Gamepad2 className="h-5 w-5 text-sky-600" /> {modePrompts[mode]}
             </CardTitle>
           </CardHeader>
           <CardContent className="relative p-6">
