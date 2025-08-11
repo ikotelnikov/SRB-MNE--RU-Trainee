@@ -15,13 +15,13 @@ import { CsvImport } from "./components/CsvImport";
 import { Word, Mode, ProgressState } from "./types";
 import { choice, clamp, loadDict, loadProgress, saveDict, saveProgress, xpToLevel, shuffle } from "./utils";
 const modePrompts: Record<Mode, string> = {
-  multiple: "Выбери ответ",
-  sr_to_ru: "Введи русский",
-  ru_to_sr: "Введи Crn",
-  typing: "Печатай слово",
-  scramble: "Собери слово",
-  true_false: "Правда или ложь",
-  audio: "Слушай и переводи",
+  multiple: "Выбери правильный из 4 вариантов:",
+  sr_to_ru: "Переведи на русский:",
+  ru_to_sr: "Переведи на черногорский:",
+  typing: "Переведи на русский:",
+  scramble: "Переведи, используя буквы в подсказке:",
+  true_false: "Правда или ложь?",
+  audio: "Слушай и переводи:",
 };
 
 // -------------------------------------------------
